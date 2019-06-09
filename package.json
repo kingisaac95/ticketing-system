@@ -1,0 +1,83 @@
+{
+  "name": "ticketing-app",
+  "version": "1.3.2",
+  "description": "Server application code for ticketing app",
+  "author": "Kingdom Orjiewuru",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./dist/server.js",
+    "start:dev": "npm run lint && nodemon server.js --exec babel-node",
+    "clean": "rm -rf dist && mkdir dist",
+    "build-babel": "rm -rf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./babelrc,./package.json,./npm-debug.log --copy-files",
+    "build": "npm run clean && npm run build-babel",
+    "postinstall": "npm run build",
+    "format": "./node_modules/prettier/bin/prettier.js --single-quote --print-width=120 --tab-width 2 --write '*.js' '**/*.js'",
+    "setup": "NODE_ENV=development sequelize db:migrate:undo:all && sequelize db:migrate",
+    "lint": "./node_modules/.bin/eslint '*.js' '**/*.js' --quiet",
+    "precommit": "npm run cover && rm -rf coverage/ && npm run lint && lint-staged",
+    "db:migrate": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
+    "test": "npm run db:migrate && NODE_ENV=test mocha --exit --compilers js:babel-core/register tests/*.spec.js --timeout 25000",
+    "cover": "rm -rf coverage/ && npm run db:migrate && NODE_ENV=test babel-node node_modules/.bin/babel-istanbul cover --report html _mocha -- -R spec tests/*.spec.js --timeout 15000 --exit"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run format",
+      "npm run build",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Afiora/afiora-server.git"
+  },
+  "author": "Afiora Technology",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Afiora/afiora-server/issues"
+  },
+  "homepage": "https://github.com/Afiora/afiora-server#readme",
+  "dependencies": {
+    "@sendgrid/mail": "6.2.1",
+    "babel-polyfill": "6.26.0",
+    "bcrypt": "^2.0.1",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.18.2",
+    "chance": "1.0.16",
+    "cors": "2.8.4",
+    "dotenv": "4.0.0",
+    "express": "4.16.2",
+    "isuuid": "0.1.0",
+    "jsonwebtoken": "8.2.0",
+    "just.randomstring": "0.1.1",
+    "lodash": "4.17.4",
+    "morgan": "1.9.0",
+    "pg": "7.4.0",
+    "pg-hstore": "2.3.2",
+    "sequelize": "4.32.2",
+    "uuid": "3.2.1",
+    "validator": "9.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-eslint": "8.0.3",
+    "babel-istanbul": "0.12.2",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "chai": "4.1.2",
+    "chance": "1.0.16",
+    "eslint": "4.13.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-prettier": "2.4.0",
+    "eslint-plugin-react": "7.5.1",
+    "husky": "0.14.3",
+    "istanbul": "0.4.5",
+    "lint-staged": "6.0.0",
+    "mocha": "4.0.1",
+    "nodemon": "1.17.4",
+    "prettier": "1.9.2",
+    "rosie": "2.0.1",
+    "supertest": "3.0.0"
+  }
+}
