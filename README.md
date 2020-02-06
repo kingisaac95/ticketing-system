@@ -1,6 +1,6 @@
 # Ticketing System
 
-> A simple ticketing API built for a hackathonn.
+> A simple ticketing API built for a hackathon.
 
 ## Installation
 
