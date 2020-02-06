@@ -36,9 +36,7 @@ npm build
 
 Orjiewuru Kingdom – [@kingisaac95](https://twitter.com/kingisaac95)
 
-Distributed under the MIT license. See `LICENSE` for more information.
-
-[https://github.com/kingisaac95/ticketing-system](https://github.com/kingisaac95/)
+Distributed under the MIT license.
 
 ## Contributing
 
